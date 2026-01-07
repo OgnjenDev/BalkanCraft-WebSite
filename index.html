@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BalkanCraft - Najbolji Minecraft Server na Balkanu!</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIJABLE --- */
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #0099cc;
+            --accent-color: #ff006e;
+            --bg-color: #0a0a0f;
+            --surface-color: rgba(255, 255, 255, 0.05);
+            --text-color: #e0e0e0;
+            --heading-color: #ffffff;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        /* --- GLOBAL STILOVI --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px; /* Smanjeno za formu */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 50px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* --- NAVIGACIJA --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            background: rgba(10, 10, 15, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 15, 0.8);
+            padding: 10px 0;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px; /* Vraceno na originalno za navbar */
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--heading-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .logo i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* --- HERO SEKCIJA --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #particles-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-content {
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.5s;
+            animation-fill-mode: both;
+        }
+        
+        .server-ip {
+            font-family: 'Courier New', Courier, monospace;
+            background: var(--surface-color);
+            padding: 15px 30px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            display: inline-block;
+            backdrop-filter: blur(5px);
+            animation: fadeInUp 1s ease-out 0.7s;
+            animation-fill-mode: both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out 0.9s;
+            animation-fill-mode: both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.6);
+        }
+        
+        /* --- BAN APPEAL SEKCIJA --- */
+        #ban-appeal {
+            background: #111122;
+        }
+        #appealForm {
+            background: var(--surface-color);
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--heading-color);
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: var(--text-color);
+            font-family: var(--font-family);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, background-color 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        #form-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: none; /* Skriveno po defaultu */
+        }
+        #form-message.success {
+            background-color: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            color: #4caf50;
+            display: block;
+        }
+        #form-message.sending {
+            background-color: rgba(255, 193, 7, 0.2);
+            border: 1px solid #ffc107;
+            color: #ffc107;
+            display: block;
+        }
+
+        /* --- STATISTIKE --- */
+        #stats {
+            background: #111122;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+        .stat-item {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .stat-item .counter {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .stat-item p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #050508;
+            padding: 50px 0 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .social-links {
+            margin-bottom: 30px;
+        }
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        footer p {
+            font-size: 0.9rem;
+        }
+
+        /* --- ANIMACIJE --- */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: rgba(10, 10, 15, 0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 20px 0;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+            #appealForm {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGACIJA ===== -->
+    <header class="navbar">
+        <div class="container">
+            <a href="#hero" class="logo"><i class="fa-solid fa-cube"></i>BalkanCraft</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Početna</a></li>
+                <li><a href="#ban-appeal">Ban Appeal</a></li>
+                <li><a href="#stats">Statistike</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== HERO SEKCIJA ===== -->
+        <section id="hero">
+            <canvas id="particles-canvas"></canvas>
+            <div class="hero-content">
+                <h1>Dobrodošli na BalkanCraft</h1>
+                <p>Doživi avanturu kao nikad prije na najboljem balkanskom serveru!</p>
+                <div class="server-ip">
+                    <i class="fa-solid fa-copy"></i> play.balkancraft.com
+                </div>
+                <a href="#ban-appeal" class="btn btn-primary">Prijavi se</a>
+            </div>
+        </section>
+
+        <!-- ===== BAN APPEAL SEKCIJA ===== -->
+        <section id="ban-appeal">
+            <div class="container">
+                <h2>Predmet Žalbe (Ban Appeal)</h2>
+                <form id="appealForm">
+                    <div class="form-group">
+                        <label for="ign">Tvoje In-Game Ime (IGN)</label>
+                        <input type="text" id="ign" name="ign" required placeholder="Unesi svoje nick...">
+                    </div>
+                    <div class="form-group">
+                        <label for="discord">Tvoj Discord Tag</label>
+                        <input type="text" id="discord" name="discord" required placeholder="Ime#1234">
+                    </div>
+                    <div class="form-group">
+                        <label for="reason">Razlog Bana (ako ga znaš)</label>
+                        <input type="text" id="reason" name="reason" placeholder="npr. Cheating, Spam...">
+                    </div>
+                    <div class="form-group">
+                        <label for="story">Tvoja strana priče</label>
+                        <textarea id="story" name="story" rows="6" required placeholder="Ovaj detaljno opiši šta se desilo..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="additional">Dodatne informacije (opcionalno)</label>
+                        <textarea id="additional" name="additional" rows="4" placeholder="Imate li nešto još da dodate?"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Pošalji Žalbu</button>
+                    <div id="form-message"></div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== STATISTIKE ===== -->
+        <section id="stats">
+            <div class="container">
+                <h2>Naši Brojevi</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="counter" data-target="15420">0</div>
+                        <p>Ukupno Igrača</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="counter" data-target="98">0</div>
+                        <p>% Aktivnosti</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="counter" data-target="500000">0</div>
+                        <p>Otkopanih Blokova</p>
+                    </div>
+                    <div class="stat-item">
+                        <div class="counter" data-target="24">0</div>
+                        <p>/7 Online Podrška</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-discord"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2026 BalkanCraft. Sva prava pridržana. Made with <i class="fa-solid fa-heart" style="color: var(--accent-color);"></i> na Balkanu.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- HAMBURGER MENI ---
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Zatvori meni nakon klika na link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // --- NAVBAR SCROLL EFECT ---
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // --- PARTICLE BACKGROUND ---
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 0.5 - 0.25;
+                this.speedY = Math.random() * 0.5 - 0.25;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = 'rgba(0, 212, 255, 0.8)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const numberOfParticles = (canvas.width * canvas.height) / 15000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function connectParticles() {
+            const maxDistance = 120;
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < maxDistance) {
+                        ctx.strokeStyle = `rgba(0, 212, 255, ${0.2 * (1 - distance / maxDistance)})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initParticles();
+        });
+
+        // --- BAN APPEAL FORM ---
+        const appealForm = document.getElementById('appealForm');
+        const formMessage = document.getElementById('form-message');
+
+        appealForm.addEventListener('submit', function(event) {
+            // Sprecava pravo slanje forme
+            event.preventDefault();
+
+            // Prikazi poruku o slanju
+            formMessage.textContent = 'Slanje...';
+            formMessage.className = 'sending';
+
+            // Simuliraj slanje na server
+            setTimeout(() => {
+                // Prikazi poruku o uspehu
+                formMessage.textContent = 'Vaša žalba je uspešno poslana! Obratit ćemo vam se u najkraćem mogućem roku.';
+                formMessage.className = 'success';
+
+                // Očisti polja forme
+                appealForm.reset();
+
+                // Sakrij poruku nakon 5 sekundi
+                setTimeout(() => {
+                    formMessage.className = '';
+                    formMessage.textContent = '';
+                }, 5000);
+
+            }, 1500); // 1.5 sekunde kasnjenja
+        });
+
+
+        // --- SCROLL REVEAL ANIMATION ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Pokreni counter ako je stat item vidljiv
+                    if (entry.target.classList.contains('stat-item')) {
+                        const counter = entry.target.querySelector('.counter');
+                        startCounter(counter);
+                        observer.unobserve(entry.target); // Zaustavi daljnje praćenje
+                    }
+                }
+            });
+        }, observerOptions);
+
+        const hiddenElements = document.querySelectorAll('.stat-item'); // Uklonjen .staff-card
+        hiddenElements.forEach(el => observer.observe(el));
+        
+        // --- ANIMIRANI BROJAČI ---
+        function startCounter(counter) {
+            const target = +counter.getAttribute('data-target');
+            const increment = target / 200;
+            let currentNum = 0;
+
+            const updateCounter = () => {
+                currentNum += increment;
+                if (currentNum < target) {
+                    counter.innerText = Math.ceil(currentNum).toLocaleString('hr-HR');
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.innerText = target.toLocaleString('hr-HR');
+                }
+            };
+            updateCounter();
+        }
+        
+        // --- KOPIRANJE IP ADRESE ---
+        const serverIpElement = document.querySelector('.server-ip');
+        serverIpElement.style.cursor = 'pointer';
+        serverIpElement.title = 'Klikni za kopiranje!';
+
+        serverIpElement.addEventListener('click', () => {
+            const ipAddress = 'play.balkancraft.com';
+            navigator.clipboard.writeText(ipAddress).then(() => {
+                const originalText = serverIpElement.innerHTML;
+                serverIpElement.innerHTML = '<i class="fa-solid fa-check"></i> IP Kopiran!';
+                setTimeout(() => {
+                    serverIpElement.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+
+    </script>
+</body>
+</html>
